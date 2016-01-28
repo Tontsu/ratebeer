@@ -1,0 +1,117 @@
+irb(main):007:0> b = Brewery.new name:"BrewDog", year:2007
+=> #<Brewery id: nil, name: "BrewDog", year: 2007, created_at: nil, updated_at: nil>
+irb(main):008:0> b.save
+   (0.1ms)  begin transaction
+  SQL (1.1ms)  INSERT INTO "breweries" ("name", "year", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["name", "BrewDog"], ["year", 2007], ["created_at", "2016-01-28 16:28:00.075741"], ["updated_at", "2016-01-28 16:28:00.075741"]]
+   (1.2ms)  commit transaction
+=> true
+irb(main):009:0> Beer.create name:"Punk IPA", style:"IPA", brewery_id:b.id
+   (0.2ms)  begin transaction
+  SQL (1.4ms)  INSERT INTO "beers" ("name", "style", "brewery_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Punk IPA"], ["style", "IPA"], ["brewery_id", "5"], ["created_at", "2016-01-28 16:32:37.236876"], ["updated_at", "2016-01-28 16:32:37.236876"]]
+   (1.2ms)  commit transaction
+=> #<Beer id: 14, name: "Punk IPA", style: "IPA", brewery_id: "5", created_at: "2016-01-28 16:32:37", updated_at: "2016-01-28 16:32:37">
+irb(main):010:0> Beer.create name:"Nanny State", style:"lowalcohol", brewery_id:b.id
+   (0.1ms)  begin transaction
+  SQL (0.3ms)  INSERT INTO "beers" ("name", "style", "brewery_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Nanny State"], ["style", "lowalcohol"], ["brewery_id", "5"], ["created_at", "2016-01-28 16:33:11.426804"], ["updated_at", "2016-01-28 16:33:11.426804"]]
+   (9.0ms)  commit transaction
+=> #<Beer id: 15, name: "Nanny State", style: "lowalcohol", brewery_id: "5", created_at: "2016-01-28 16:33:11", updated_at: "2016-01-28 16:33:11">
+irb(main):011:0> bisse = b.first
+NoMethodError: undefined method `first' for #<Brewery:0x007fdf268982a0>
+	from /Users/Tontsu/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/activemodel-4.2.4/lib/active_model/attribute_methods.rb:433:in `method_missing'
+	from (irb):11
+	from /Users/Tontsu/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/railties-4.2.4/lib/rails/commands/console.rb:110:in `start'
+	from /Users/Tontsu/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/railties-4.2.4/lib/rails/commands/console.rb:9:in `start'
+	from /Users/Tontsu/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/railties-4.2.4/lib/rails/commands/commands_tasks.rb:68:in `console'
+	from /Users/Tontsu/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/railties-4.2.4/lib/rails/commands/commands_tasks.rb:39:in `run_command!'
+	from /Users/Tontsu/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/railties-4.2.4/lib/rails/commands.rb:17:in `<top (required)>'
+	from /Users/Tontsu/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/activesupport-4.2.4/lib/active_support/dependencies.rb:274:in `require'
+	from /Users/Tontsu/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/activesupport-4.2.4/lib/active_support/dependencies.rb:274:in `block in require'
+	from /Users/Tontsu/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/activesupport-4.2.4/lib/active_support/dependencies.rb:240:in `load_dependency'
+	from /Users/Tontsu/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/activesupport-4.2.4/lib/active_support/dependencies.rb:274:in `require'
+	from /Users/Tontsu/Documents/ratebeer/bin/rails:9:in `<top (required)>'
+	from /Users/Tontsu/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/activesupport-4.2.4/lib/active_support/dependencies.rb:268:in `load'
+	from /Users/Tontsu/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/activesupport-4.2.4/lib/active_support/dependencies.rb:268:in `block in load'
+	from /Users/Tontsu/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/activesupport-4.2.4/lib/active_support/dependencies.rb:240:in `load_dependency'
+	from /Users/Tontsu/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/activesupport-4.2.4/lib/active_support/dependencies.rb:268:in `load'
+	from /Users/Tontsu/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/spring-1.6.2/lib/spring/commands/rails.rb:6:in `call'
+	from /Users/Tontsu/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/spring-1.6.2/lib/spring/command_wrapper.rb:38:in `call'
+	from /Users/Tontsu/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/spring-1.6.2/lib/spring/application.rb:185:in `block in serve'
+	from /Users/Tontsu/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/spring-1.6.2/lib/spring/application.rb:156:in `fork'
+	from /Users/Tontsu/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/spring-1.6.2/lib/spring/application.rb:156:in `serve'
+	from /Users/Tontsu/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/spring-1.6.2/lib/spring/application.rb:131:in `block in run'
+	from /Users/Tontsu/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/spring-1.6.2/lib/spring/application.rb:125:in `loop'
+	from /Users/Tontsu/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/spring-1.6.2/lib/spring/application.rb:125:in `run'
+	from /Users/Tontsu/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/spring-1.6.2/lib/spring/application/boot.rb:18:in `<top (required)>'
+	from /Users/Tontsu/.rbenv/versions/2.2.3/lib/ruby/2.2.0/rubygems/core_ext/kernel_require.rb:54:in `require'
+	from /Users/Tontsu/.rbenv/versions/2.2.3/lib/ruby/2.2.0/rubygems/core_ext/kernel_require.rb:54:in `require'
+	from -e:1:in `<main>'irb(main):012:0> reload!
+Reloading...
+=> true
+irb(main):013:0> bisse = b.first
+NoMethodError: undefined method `first' for #<Brewery:0x007fdf268982a0>
+	from /Users/Tontsu/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/activemodel-4.2.4/lib/active_model/attribute_methods.rb:433:in `method_missing'
+	from (irb):13
+	from /Users/Tontsu/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/railties-4.2.4/lib/rails/commands/console.rb:110:in `start'
+	from /Users/Tontsu/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/railties-4.2.4/lib/rails/commands/console.rb:9:in `start'
+	from /Users/Tontsu/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/railties-4.2.4/lib/rails/commands/commands_tasks.rb:68:in `console'
+	from /Users/Tontsu/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/railties-4.2.4/lib/rails/commands/commands_tasks.rb:39:in `run_command!'
+	from /Users/Tontsu/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/railties-4.2.4/lib/rails/commands.rb:17:in `<top (required)>'
+	from /Users/Tontsu/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/activesupport-4.2.4/lib/active_support/dependencies.rb:274:in `require'
+	from /Users/Tontsu/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/activesupport-4.2.4/lib/active_support/dependencies.rb:274:in `block in require'
+	from /Users/Tontsu/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/activesupport-4.2.4/lib/active_support/dependencies.rb:240:in `load_dependency'
+	from /Users/Tontsu/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/activesupport-4.2.4/lib/active_support/dependencies.rb:274:in `require'
+	from /Users/Tontsu/Documents/ratebeer/bin/rails:9:in `<top (required)>'
+	from /Users/Tontsu/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/activesupport-4.2.4/lib/active_support/dependencies.rb:268:in `load'
+	from /Users/Tontsu/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/activesupport-4.2.4/lib/active_support/dependencies.rb:268:in `block in load'
+	from /Users/Tontsu/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/activesupport-4.2.4/lib/active_support/dependencies.rb:240:in `load_dependency'
+	from /Users/Tontsu/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/activesupport-4.2.4/lib/active_support/dependencies.rb:268:in `load'
+	from /Users/Tontsu/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/spring-1.6.2/lib/spring/commands/rails.rb:6:in `call'
+	from /Users/Tontsu/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/spring-1.6.2/lib/spring/command_wrapper.rb:38:in `call'
+	from /Users/Tontsu/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/spring-1.6.2/lib/spring/application.rb:185:in `block in serve'
+	from /Users/Tontsu/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/spring-1.6.2/lib/spring/application.rb:156:in `fork'
+	from /Users/Tontsu/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/spring-1.6.2/lib/spring/application.rb:156:in `serve'
+	from /Users/Tontsu/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/spring-1.6.2/lib/spring/application.rb:131:in `block in run'
+	from /Users/Tontsu/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/spring-1.6.2/lib/spring/application.rb:125:in `loop'
+	from /Users/Tontsu/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/spring-1.6.2/lib/spring/application.rb:125:in `run'
+	from /Users/Tontsu/.rbenv/versions/2.2.3/lib/ruby/gems/2.2.0/gems/spring-1.6.2/lib/spring/application/boot.rb:18:in `<top (required)>'
+	from /Users/Tontsu/.rbenv/versions/2.2.3/lib/ruby/2.2.0/rubygems/core_ext/kernel_require.rb:54:in `require'
+	from /Users/Tontsu/.rbenv/versions/2.2.3/lib/ruby/2.2.0/rubygems/core_ext/kernel_require.rb:54:in `require'
+	from -e:1:in `<main>'irb(main):014:0> b
+=> #<Brewery id: 5, name: "BrewDog", year: 2007, created_at: "2016-01-28 16:28:00", updated_at: "2016-01-28 16:28:00">
+irb(main):015:0> bisse = Beer.find_by name:"Punk IPA"
+  Beer Load (0.6ms)  SELECT  "beers".* FROM "beers" WHERE "beers"."name" = ? LIMIT 1  [["name", "Punk IPA"]]
+=> #<Beer id: 14, name: "Punk IPA", style: "IPA", brewery_id: "5", created_at: "2016-01-28 16:32:37", updated_at: "2016-01-28 16:32:37">
+irb(main):016:0> bisse.ratings.create score:2
+   (0.1ms)  begin transaction
+  SQL (0.5ms)  INSERT INTO "ratings" ("score", "beer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["score", 2], ["beer_id", 14], ["created_at", "2016-01-28 16:37:44.169043"], ["updated_at", "2016-01-28 16:37:44.169043"]]
+   (1.4ms)  commit transaction
+=> #<Rating id: 4, score: 2, beer_id: 14, created_at: "2016-01-28 16:37:44", updated_at: "2016-01-28 16:37:44">
+irb(main):017:0> bisse.ratings.create score:5
+   (0.1ms)  begin transaction
+  SQL (0.8ms)  INSERT INTO "ratings" ("score", "beer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["score", 5], ["beer_id", 14], ["created_at", "2016-01-28 16:37:49.829660"], ["updated_at", "2016-01-28 16:37:49.829660"]]
+   (1.6ms)  commit transaction
+=> #<Rating id: 5, score: 5, beer_id: 14, created_at: "2016-01-28 16:37:49", updated_at: "2016-01-28 16:37:49">
+irb(main):018:0> bisse.ratings.create score:20
+   (0.1ms)  begin transaction
+  SQL (0.2ms)  INSERT INTO "ratings" ("score", "beer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["score", 20], ["beer_id", 14], ["created_at", "2016-01-28 16:37:53.878667"], ["updated_at", "2016-01-28 16:37:53.878667"]]
+   (8.7ms)  commit transaction
+=> #<Rating id: 6, score: 20, beer_id: 14, created_at: "2016-01-28 16:37:53", updated_at: "2016-01-28 16:37:53">
+irb(main):019:0> bisse = Beer.find_by name:"Nanny State"
+  Beer Load (0.2ms)  SELECT  "beers".* FROM "beers" WHERE "beers"."name" = ? LIMIT 1  [["name", "Nanny State"]]
+=> #<Beer id: 15, name: "Nanny State", style: "lowalcohol", brewery_id: "5", created_at: "2016-01-28 16:33:11", updated_at: "2016-01-28 16:33:11">
+irb(main):020:0> bisse.ratings.create score:5
+   (0.1ms)  begin transaction
+  SQL (0.3ms)  INSERT INTO "ratings" ("score", "beer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["score", 5], ["beer_id", 15], ["created_at", "2016-01-28 16:38:18.354511"], ["updated_at", "2016-01-28 16:38:18.354511"]]
+   (1.2ms)  commit transaction
+=> #<Rating id: 7, score: 5, beer_id: 15, created_at: "2016-01-28 16:38:18", updated_at: "2016-01-28 16:38:18">
+irb(main):021:0> bisse.ratings.create score:10
+   (0.1ms)  begin transaction
+  SQL (0.9ms)  INSERT INTO "ratings" ("score", "beer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["score", 10], ["beer_id", 15], ["created_at", "2016-01-28 16:38:22.464596"], ["updated_at", "2016-01-28 16:38:22.464596"]]
+   (9.0ms)  commit transaction
+=> #<Rating id: 8, score: 10, beer_id: 15, created_at: "2016-01-28 16:38:22", updated_at: "2016-01-28 16:38:22">
+irb(main):022:0> bisse.ratings.create score:15
+   (0.1ms)  begin transaction
+  SQL (0.4ms)  INSERT INTO "ratings" ("score", "beer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["score", 15], ["beer_id", 15], ["created_at", "2016-01-28 16:38:24.635879"], ["updated_at", "2016-01-28 16:38:24.635879"]]
+   (8.3ms)  commit transaction
+=> #<Rating id: 9, score: 15, beer_id: 15, created_at: "2016-01-28 16:38:24", updated_at: "2016-01-28 16:38:24">
+irb(main):023:0>
