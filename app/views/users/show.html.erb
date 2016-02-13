@@ -6,6 +6,8 @@
 </p>
 
 <p>Has made <%= pluralize(@user.ratings.count, "rating") %> average <%= @user.average_rating %></p>
+<p>Favorite beer style <%= @user.favorite_style%></p>
+<p>Favorite brewery <%= @user.favorite_brewery%></p>
 
 Member of
 <% @user.memberships.each do |membership| %>

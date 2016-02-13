@@ -26,11 +26,11 @@ class MembershipsController < ApplicationController
   # POST /memberships.json
   def create
     #if not Membership.all.map(&:user_id).include? current_user.id
-      p = {:user_id => current_user.id }
-      @membership = Membership.new(membership_params.merge(p))
+      @membership = Membership.new(membership_params)
+      @membership.user = current_user
 
     respond_to do |format|
-      if @membership.save
+      if not current_user.nil? and @membership.save
         format.html { redirect_to @membership, notice: 'Membership was successfully created.' }
         format.json { render :show, status: :created, location: @membership }
       else
