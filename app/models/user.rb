@@ -21,6 +21,12 @@ class User < ActiveRecord::Base
     end
   end
 
+  def at_least_one_number
+    if not /[0-9]/.match(password)
+      errors.add(:password, "must contain at least one number")
+    end
+  end
+
   def favorite_beer
     return nil if ratings.empty?
     ratings.order(score: :desc).limit(1).first.beer
@@ -34,13 +40,7 @@ class User < ActiveRecord::Base
   end
 
   def favorite_brewery
-    return nil if ratings.empty? else Hash[ratings.group_by {|r| r.beer.brewery.name}.keys.zip(ratings.group_by {|r| r.beer.brewery.name}.map { |k, v| v.inject(0.0){ |sum, i| sum + i.score} / v.size})].max.first
-  end
-
-  def at_least_one_number
-    if not /[0-9]/.match(password)
-      errors.add(:password, "must contain at least one number")
-    end
+    Hash[ratings.group_by {|r| r.beer.brewery.name}.keys.zip(ratings.group_by {|r| r.beer.brewery.name}.map { |k, v| v.inject(0.0){ |sum, i| sum + i.score} / v.size})].max.first rescue nil
   end
 
 end
