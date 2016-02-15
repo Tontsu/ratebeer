@@ -14,7 +14,7 @@
       <img src="./assets/0.10.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2016-02-15T22:08:45+02:00">2016-02-15T22:08:45+02:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2016-02-15T22:29:10+02:00">2016-02-15T22:29:10+02:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -253,7 +253,7 @@
       <tr>
         <td class="strong"><a href="#658d9be2d3823796f01a3219c92610d170f76ef0" class="src_link" title="app/models/user.rb">app/models/user.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>47</td>
+        <td>46</td>
         <td>27</td>
         <td>27</td>
         <td>0</td>
@@ -478,7 +478,7 @@
       <tr>
         <td class="strong"><a href="#658d9be2d3823796f01a3219c92610d170f76ef0" class="src_link" title="app/models/user.rb">app/models/user.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>47</td>
+        <td>46</td>
         <td>27</td>
         <td>27</td>
         <td>0</td>
@@ -4670,31 +4670,25 @@
           <code class="ruby">  def favorite_brewery</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="43">
-          
-          
-          <code class="ruby">    # return nil if ratings.empty?</code>
-        </li>
-      
-        <li class="covered" data-hits="82" data-linenumber="44">
+        <li class="covered" data-hits="82" data-linenumber="43">
           <span class="hits">82</span>
           
-          <code class="ruby">     Hash[ratings.group_by {|r| r.beer.brewery.name}.keys.zip(ratings.group_by {|r| r.beer.brewery.name}.map { |k, v| v.inject(0.0){ |sum, i| sum + i.score} / v.size})].max.first rescue nil</code>
+          <code class="ruby">    Hash[ratings.group_by {|r| r.beer.brewery.name}.keys.zip(ratings.group_by {|r| r.beer.brewery.name}.map { |k, v| v.inject(0.0){ |sum, i| sum + i.score} / v.size})].max.first rescue nil</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="45">
+        <li class="never" data-hits="" data-linenumber="44">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="46">
+        <li class="never" data-hits="" data-linenumber="45">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="47">
+        <li class="never" data-hits="" data-linenumber="46">
           
           
           <code class="ruby">end</code>
