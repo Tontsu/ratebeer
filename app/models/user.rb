@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
 
   def favorite_style
     return nil if ratings.empty?
-    group = ratings.group_by {|r| r.beer.style}
+    group = ratings.group_by {|r| r.beer.style.name}
     averages = group.map { |k, v| v.inject(0.0){ |sum, i| sum + i.score} / v.size}
     Hash[group.keys.zip(averages)].max.first
   end

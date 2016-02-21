@@ -9,10 +9,9 @@ describe "Beer" do
   end
 
   it "is created with valid name" do
+    FactoryGirl.create(:style)
     visit new_beer_path
-
     fill_in('beer_name', with:'Bisse')
-
     expect{
       click_button "Create Beer"
     }.to change{Beer.count}.from(0).to(1)

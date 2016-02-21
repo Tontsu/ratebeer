@@ -1,0 +1,7 @@
+<h2>List of styles</h2>
+
+<ul>
+ <% @styles.each do |style| %>
+   <li> <%= link_to style.name, style %> </li>
+ <% end %>
+</ul>

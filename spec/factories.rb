@@ -28,10 +28,14 @@ FactoryGirl.define do
     year 1900
   end
 
+  factory :style do
+    name "IPA"
+  end
+
   factory :beer do
     name "Bisse"
     brewery
-    style "IPA"
+    style
   end
 
 end

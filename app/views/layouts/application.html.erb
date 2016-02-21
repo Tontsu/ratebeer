@@ -11,8 +11,10 @@
   <div class="navibar">
    <%= link_to 'breweries', breweries_path %>
    <%= link_to 'beers', beers_path %>
+   <%= link_to 'styles', styles_path %>
    <%= link_to 'ratings', ratings_path %>
    <%= link_to 'clubs', beer_clubs_path %>
+   <%= link_to 'search', places_path %>
    |
    <% if current_user %>
      <%= link_to current_user.username, user_path(current_user) %>

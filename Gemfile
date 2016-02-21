@@ -23,6 +23,7 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bcrypt', '~> 3.1.7'
+gem 'httparty'
 
 group :development, :test do
   gem 'sqlite3'
@@ -55,6 +56,7 @@ group :test do
   gem 'launchy'
   gem 'rspec-its'
   gem 'simplecov', require: false
+  gem 'webmock'
 end
 
 group :development do

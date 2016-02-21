@@ -12,7 +12,7 @@ describe 'User page' do
   it "should show favorite beer style and favorite brewery" do
     rating = FactoryGirl.create(:rating, user:user, score:10, beer:beer1)
     visit user_path(user)
-    expect(page).to have_content "Favorite beer style #{beer1.style}"
+    expect(page).to have_content "Favorite beer style #{beer1.style.name}"
     expect(page).to have_content "Favorite brewery #{beer1.brewery.name}"
   end
 end

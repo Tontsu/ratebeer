@@ -2,12 +2,12 @@ require 'rails_helper'
 
 RSpec.describe Beer, type: :model do
   it "is saved when name and style is set" do
-    Beer.create name: "Bisse", style: "rölli"
+    Beer.create name: "Bisse", style: FactoryGirl.create(:style)
     expect(Beer.count).to eq(1)
   end
 
   it "is not saved if name is not set" do
-    Beer.create style: "rölli"
+    Beer.create style: FactoryGirl.create(:style)
     expect(Beer.count).to eq(0)
   end
 
