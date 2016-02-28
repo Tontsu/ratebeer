@@ -2,8 +2,11 @@
 
 <p>
   <strong><%= @user.username %></strong>
-
 </p>
+
+<% if @user.banned %>
+  <h1> BANNEDED!!!111 </h1>
+<% end %>
 
 <p>Has made <%= pluralize(@user.ratings.count, "rating") %> average <%= @user.average_rating %></p>
 <p>Favorite beer style <%= @user.favorite_style%></p>
@@ -26,6 +29,10 @@ Member of
     </li>
  <% end %>
 </ul>
+
+<% if current_user and current_user.admin %>
+  <%= link_to "BAN USER", ban_user_user_path(@user.id), method: :post, class: "btn btn-danger" %>
+<% end %>
 
 
 <% if @user == current_user %>

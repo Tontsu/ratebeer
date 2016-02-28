@@ -1,0 +1,17 @@
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th><%= header1 %></th>
+      <th><%= header2 %></th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+  <tbody>
+ <% items.each do |item| %>
+ <tr>
+   <td> <%= link_to eval(item1), item %> </td>
+   <td> <%= eval(item2) %> </td>
+ </tr>
+ <% end %>
+  </tbody>
+</table>

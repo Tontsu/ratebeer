@@ -5,4 +5,4 @@
 
 <p> <%= @place.zip %> <%= @place.city %> </p>
 
-<%= content_tag(:iframe,'', width: 600, height: 400, src: "https#{@place.blogmap[4..@place.blogmap.length]}") %>
+<%= content_tag(:iframe,'', width: 600, height: 400, src: "http#{@place.blogmap[4..@place.blogmap.length]}") %>

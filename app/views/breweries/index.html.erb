@@ -1,30 +1,20 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Breweries</h1>
+<h1>Breweries</h1>
 
-<p> Number of breweries: <%= @breweries.count %> </p>
+<h2>Active</h2>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Year</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<p> Number of active breweries: <%= @active_breweries.count %> </p>
 
-  <tbody>
-    <% @breweries.each do |brewery| %>
-      <tr>
-        <td><%= link_to "#{brewery.name}", brewery %></td>
-        <td><%= brewery.year %></td>
-        <td><%= link_to 'Edit', edit_brewery_path(brewery) %></td>
-        <td><%= link_to 'Destroy', brewery, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<%= render 'list', breweries: @active_breweries %>
+
+<h2>Retired</h2>
+
+<p> Number of retired breweries: <%= @retired_breweries.count %> </p>
+
+<%= render 'list', breweries: @retired_breweries %>
 
 <br>
+
 <%= link_to('New Brewery', new_brewery_path) if current_user %>
 <%= link_to 'List of Beers', beers_path %>

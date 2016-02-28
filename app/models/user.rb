@@ -43,4 +43,9 @@ class User < ActiveRecord::Base
     Hash[ratings.group_by {|r| r.beer.brewery.name}.keys.zip(ratings.group_by {|r| r.beer.brewery.name}.map { |k, v| v.inject(0.0){ |sum, i| sum + i.score} / v.size})].max.first rescue nil
   end
 
+  def self.top(n)
+    sorted_by_rating_in_desc_order = User.all.sort_by{ |b| -(b.ratings.count||0) }
+    sorted_by_rating_in_desc_order[0..n]
+  end
+
 end
