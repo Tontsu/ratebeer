@@ -1,12 +1,21 @@
 class BeersController < ApplicationController
   before_action :set_beer, only: [:show, :edit, :update, :destroy]
   before_action :set_breweries_and_styles_for_template, only: [:new, :edit, :create]
-  before_action :ensure_that_signed_in, except: [:index, :show]
+  before_action :ensure_that_signed_in, except: [:index, :show, :list, :nglist]
   before_action :check_if_admin, only: [:destroy]
+  before_action :skip_if_cached, only: [:index]
   # GET /beers
   # GET /beers.json
   def index
-    @beers = Beer.all
+    @beers = Beer.includes(:brewery, :style).all
+
+    order = params[:order] || 'name'
+
+    @beers = case order
+      when 'name' then @beers.sort_by{ |b| b.name }
+      when 'brewery' then @beers.sort_by { |b| b.brewery.name}
+      when 'style' then @beers.sort_by { |b| b.style.name}
+    end
   end
 
   # GET /beers/1
@@ -32,6 +41,7 @@ class BeersController < ApplicationController
 
     respond_to do |format|
       if @beer.save
+        ["beerlist-name", "beerlist-brewery", "beerlist-style"].each{ |f| expire_fragment(f) }
         format.html { redirect_to beers_path, notice: 'Beer was successfully created.' }
         format.json { render :show, status: :created, location: @beer }
       else
@@ -46,6 +56,7 @@ class BeersController < ApplicationController
   def update
     respond_to do |format|
       if @beer.update(beer_params)
+        ["beerlist-name", "beerlist-brewery", "beerlist-style"].each{ |f| expire_fragment(f) }
         format.html { redirect_to @beer, notice: 'Beer was successfully updated.' }
         format.json { render :show, status: :ok, location: @beer }
       else
@@ -60,13 +71,26 @@ class BeersController < ApplicationController
   def destroy
     @beer.destroy
     respond_to do |format|
+      ["beerlist-name", "beerlist-brewery", "beerlist-style"].each{ |f| expire_fragment(f) }
       format.html { redirect_to beers_url, notice: 'Beer was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
+  def list
+  end
+
+  def nglist
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
+
+    def skip_if_cached
+      @order = params[:order] || 'name'
+      return render :index if fragment_exist?( "beerlist-#{@order}"  )
+    end
+
     def set_beer
       @beer = Beer.find(params[:id])
     end

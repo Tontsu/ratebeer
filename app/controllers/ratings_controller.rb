@@ -1,10 +1,10 @@
 class RatingsController < ApplicationController
   def index
-    @ratings = Rating.all
-    @mostRatedUsers = User.top 2
-    @bestRatedBeers = Beer.top 2
-    @bestRatedBreweries = Brewery.top 2
-    @bestStyles = Style.top 2
+    @ratings = cache_data("all ratings", "Rating.all", 5)
+    @mostActiveUsers = cache_data("active users", "User.top(2)", 60)
+    @bestRatedBeers = cache_data("best beers", "Beer.top(2)", 60)
+    @bestRatedBreweries = cache_data("best breweries", "Brewery.top(2)", 60)
+    @bestStyles = cache_data("best styles", "Style.top(2)", 60)
   end
 
   def new
@@ -29,6 +29,13 @@ class RatingsController < ApplicationController
     rating = Rating.find(params[:id])
     rating.delete if current_user == rating.user
     redirect_to :back
+  end
+
+  private
+
+  def cache_data(cache_key, from, time)
+    Rails.cache.write(cache_key, eval(from), expires_in: time.seconds) unless Rails.cache.exist?(cache_key)
+    Rails.cache.read cache_key
   end
 
 end

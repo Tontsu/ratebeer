@@ -1,5 +1,9 @@
 module Helpers
 
+  Capybara.register_driver :javascript do |app|
+    Capybara::Selenium::Driver.new(app, :browser => :chrome)
+  end
+
   def sign_in(credentials)
     visit signin_path
     fill_in('username', with:credentials[:username])

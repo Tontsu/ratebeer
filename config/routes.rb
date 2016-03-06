@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :memberships
+  resources :memberships do
+    post 'confirm_user', on: :member
+  end
   resources :beer_clubs
   resources :users do
     post 'ban_user', on: :member
@@ -17,8 +19,12 @@ Rails.application.routes.draw do
   get 'signup', to: 'users#new'
   get 'signin', to: 'sessions#new'
   get 'places', to: 'places#index'
+  get 'beerlist', to: 'beers#list'
+  get 'ngbeerlist', to: 'beers#nglist'
+  get 'brewerylist', to: 'breweries#list'
   post 'places', to: 'places#search'
   delete 'signout', to: 'sessions#destroy'
+  get 'auth/:provider/callback', to: 'sessions#create_oauth'
 
 
 

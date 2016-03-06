@@ -13,9 +13,26 @@
 
 <ul>
   <% @beer_club.memberships.each do |membership| %>
-  <li>
-    <%= link_to membership.user.username, membership.user %>
-  </li>
+    <% if membership.confirmed %>
+      <li>
+        <%= link_to membership.user.username, membership.user %>
+      </li>
+    <% end %>
+  <% end %>
+</ul>
+
+<h1>Pending</h1>
+
+<ul>
+  <% @beer_club.memberships.each do |membership| %>
+    <% unless membership.confirmed %>
+      <li>
+        <%= link_to membership.user.username, membership.user %>
+        <% if @beer_club.memberships.find_by(user_id: current_user.id, confirmed: true)%>
+          <%= link_to "confirm user", confirm_user_membership_path(membership.id), method: :post, class: "btn btn-primary" %>
+        <% end %>
+      </li>
+    <% end %>
   <% end %>
 </ul>
 

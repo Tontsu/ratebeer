@@ -67,6 +67,16 @@ class MembershipsController < ApplicationController
     end
   end
 
+  def confirm_user
+    membership = Membership.find(params[:id])
+    if Membership.find_by(beer_club_id: membership.beer_club_id, user_id: current_user.id, confirmed: true)
+      membership.update_attribute :confirmed, (true)
+      redirect_to :back, notice:"membership confirmed"
+    else
+      redirect_to :back, notice:"membership not confirmed"
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_membership
